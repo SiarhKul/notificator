@@ -41,15 +41,6 @@ docker-compose logs -f
 docker-compose down
 ```
 
-### Kubernetes
-
-```bash
-kubectl apply -f k8s/deployment.yaml
-kubectl get pods -l app=notification-service
-kubectl logs -l app=notification-service -f
-kubectl delete -f k8s/deployment.yaml
-```
-
 ## 🔐 mTLS Certificates
 
 ### Windows
@@ -182,7 +173,6 @@ notification-service/
 │   └── main.ts
 ├── test-client/               # Test client
 ├── scripts/                   # Utility scripts
-├── k8s/                       # Kubernetes
 ├── Dockerfile
 ├── docker-compose.yml
 └── .env

@@ -52,9 +52,7 @@ All necessary packages installed:
 
 ### 5. **Infrastructure**
 - ✅ **Dockerfile** (multi-stage build)
-- ✅ **docker-compose.yml** 
-- ✅ **Kubernetes deployment.yaml**
-- ✅ **HorizontalPodAutoscaler**
+- ✅ **docker-compose.yml**
 
 ### 6. **Testing**
 - ✅ Full-featured test client
@@ -91,7 +89,6 @@ notification-service/
 │   └── filters/grpc-exception.filter.ts        # Errors
 ├── test-client/                      # Test client
 ├── scripts/                          # Cert generation
-├── k8s/                             # Kubernetes
 ├── Dockerfile                        # Docker image
 └── [7 documentation files]
 ```
@@ -193,8 +190,7 @@ GRPC_CLIENT_CERT_REQUIRED=true
 
 ### For DevOps:
 1. 🐳 Build Docker image
-2. ☸️ Deploy to Kubernetes
-3. 🔒 Configure mTLS
+2. 🔒 Configure mTLS
 
 ---
 
@@ -208,7 +204,6 @@ GRPC_CLIENT_CERT_REQUIRED=true
 ✅ **Validation** - class-validator  
 ✅ **Error Handling** - structured errors  
 ✅ **Docker** - containerized  
-✅ **Kubernetes** - cloud-ready  
 ✅ **Documentation** - complete documentation
 
 ---
@@ -307,11 +302,6 @@ docker-compose up -d    # Start
 docker-compose logs -f  # View logs
 docker-compose down     # Stop
 
-# Kubernetes
-kubectl apply -f k8s/deployment.yaml
-kubectl get pods -l app=notification-service
-kubectl logs -l app=notification-service -f
-
 # Certificates (mTLS)
 .\scripts\generate-certs.ps1    # Windows
 ./scripts/generate-certs.sh     # Linux/Mac
@@ -327,7 +317,7 @@ You have a **fully ready-to-use** Notification Service with:
 - ✅ Complete documentation
 - ✅ Usage examples
 - ✅ Test client
-- ✅ Docker/Kubernetes configuration
+- ✅ Docker configuration
 - ✅ Security best practices
 
 **Project is ready to use right now!** 🚀

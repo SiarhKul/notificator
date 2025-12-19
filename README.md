@@ -216,7 +216,7 @@ Recommended additions:
 - **Logging**: Winston, Pino
 - **Metrics**: Prometheus + Grafana
 - **Tracing**: OpenTelemetry, Jaeger
-- **Health checks**: Kubernetes liveness/readiness
+- **Health checks**: HTTP endpoints for liveness/readiness
 
 ## 🧪 Client Testing
 

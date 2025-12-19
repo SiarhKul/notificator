@@ -289,39 +289,30 @@ Client Request
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│                    Kubernetes Cluster                       │
+│                    Docker Deployment                        │
 ├────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌──────────────────────────────────────────────────┐     │
-│  │              Load Balancer (Service)              │     │
-│  │                ClusterIP: 50051                   │     │
+│  │         Docker Compose / Docker Swarm             │     │
+│  │                  Port: 50051                      │     │
 │  └───────────────────────┬──────────────────────────┘     │
 │                          │                                  │
-│              ┌───────────┼───────────┐                     │
-│              │           │           │                      │
-│              ▼           ▼           ▼                      │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐         │
-│  │   Pod 1     │ │   Pod 2     │ │   Pod 3     │         │
-│  │ (Replica 1) │ │ (Replica 2) │ │ (Replica 3) │         │
-│  │             │ │             │ │             │         │
-│  │  Container: │ │  Container: │ │  Container: │         │
-│  │  notification│ │  notification│ │  notification│        │
-│  │  -service   │ │  -service   │ │  -service   │         │
-│  │             │ │             │ │             │         │
-│  │  Port: 50051│ │  Port: 50051│ │  Port: 50051│         │
-│  │             │ │             │ │             │         │
-│  │  Resources: │ │  Resources: │ │  Resources: │         │
-│  │  CPU: 250m  │ │  CPU: 250m  │ │  CPU: 250m  │         │
-│  │  Mem: 256Mi │ │  Mem: 256Mi │ │  Mem: 256Mi │         │
-│  └─────────────┘ └─────────────┘ └─────────────┘         │
-│                                                             │
-│  ┌──────────────────────────────────────────────────┐     │
-│  │      HorizontalPodAutoscaler (HPA)               │     │
-│  │  • Min replicas: 3                               │     │
-│  │  • Max replicas: 10                              │     │
-│  │  • Target CPU: 70%                               │     │
-│  │  • Target Memory: 80%                            │     │
-│  └──────────────────────────────────────────────────┘     │
+│                          ▼                                  │
+│  ┌─────────────────────────────────────────────────┐      │
+│  │         Notification Service Container           │      │
+│  │                                                   │      │
+│  │  Image: notification-service:1.0.0               │      │
+│  │  Port: 50051                                     │      │
+│  │                                                   │      │
+│  │  Environment:                                    │      │
+│  │  • GRPC_PORT=50051                               │      │
+│  │  • GRPC_USE_TLS=true                             │      │
+│  │  • NODE_ENV=production                           │      │
+│  │                                                   │      │
+│  │  Volumes:                                        │      │
+│  │  • ./certs:/app/certs                            │      │
+│  │  • ./logs:/app/logs                              │      │
+│  └─────────────────────────────────────────────────┘      │
 │                                                             │
 └────────────────────────────────────────────────────────────┘
 ```
@@ -425,7 +416,7 @@ FAILED:    Error, not delivered
 ```
 
 This architecture provides:
-- ✅ Scalability (Kubernetes + HPA)
+- ✅ Scalability (Docker + Load Balancer)
 - ✅ Security (mTLS + Auth)
 - ✅ Reliability (Retry + Error Handling)
 - ✅ Performance (gRPC + HTTP/2)

@@ -89,12 +89,6 @@
 | `scripts/generate-certs.sh` | **Generate mTLS certificates (Linux/Mac)**<br>- CA certificate<br>- Server certificate<br>- Client certificate |
 | `scripts/generate-certs.ps1` | **Generate mTLS certificates (Windows)**<br>- PowerShell version<br>- Same certificates |
 
-### ☸️ Kubernetes (k8s/)
-
-| File | Description |
-|------|-------------|
-| `k8s/deployment.yaml` | **Kubernetes manifests**<br>- ConfigMap<br>- Service (ClusterIP)<br>- Deployment (3 replicas)<br>- HorizontalPodAutoscaler |
-
 ### 📚 Documentation
 
 | File | Size | Description |
@@ -155,10 +149,6 @@ notification-service/
 │       ├── generate-certs.sh
 │       └── generate-certs.ps1
 │
-├── ☸️ Kubernetes
-│   └── k8s/
-│       └── deployment.yaml
-│
 └── 📚 Documentation
     ├── README.md
     ├── QUICKSTART.md
@@ -194,9 +184,8 @@ notification-service/
 
 1. **Dockerfile** - Container image
 2. **docker-compose.yml** - Local deployment
-3. **k8s/deployment.yaml** - Kubernetes deployment
-4. **scripts/generate-certs.ps1** - mTLS certificates
-5. **.env.example** - Environment configuration
+3. **scripts/generate-certs.ps1** - mTLS certificates
+4. **.env.example** - Environment configuration
 
 ## 🎯 Core Concepts by File
 
@@ -307,9 +296,6 @@ async sendNotification(data: SendNotificationDto) {
 ### Configure mTLS?
 → `scripts/generate-certs.ps1` + `.env` (GRPC_USE_TLS=true)
 
-### Deploy to Kubernetes?
-→ `k8s/deployment.yaml`
-
 ### Usage examples?
 → `test-client/test-client.ts` + `CHEATSHEET.md`
 
@@ -323,7 +309,6 @@ async sendNotification(data: SendNotificationDto) {
 - [x] Configuration set up
 - [x] Test client implemented
 - [x] Dockerfile created
-- [x] Kubernetes manifests ready
 - [x] Documentation complete
 - [x] Code examples added
 - [x] mTLS scripts ready
@@ -343,7 +328,6 @@ All files are in place, project is fully ready to work.
 1. Generate certificates (`scripts/generate-certs.ps1`)
 2. Enable mTLS in `.env`
 3. Build Docker image (`Dockerfile`)
-4. Deploy to Kubernetes (`k8s/deployment.yaml`)
 
 ---
 

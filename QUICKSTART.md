@@ -169,18 +169,6 @@ docker run -p 50051:50051 notification-service:1.0.0
 docker-compose up -d
 ```
 
-## ☸️ Kubernetes
-
-```bash
-# Apply deployment
-kubectl apply -f k8s/deployment.yaml
-
-# Check status
-kubectl get pods -l app=notification-service
-
-# Check logs
-kubectl logs -l app=notification-service -f
-```
 
 ## 🔧 API Gateway Integration
 

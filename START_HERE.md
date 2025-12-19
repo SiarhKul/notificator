@@ -16,7 +16,6 @@
 
 3. **Infrastructure**
    - Docker & Docker Compose
-   - Kubernetes manifests
    - Certificate generation scripts
 
 4. **Testing**
@@ -111,10 +110,6 @@ npm run start:dev
 docker-compose up -d
 ```
 
-### Kubernetes
-```bash
-kubectl apply -f k8s/deployment.yaml
-```
 
 ---
 

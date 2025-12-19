@@ -44,8 +44,6 @@ notification-service/
 ├── scripts/
 │   ├── generate-certs.sh          ✅ Cert generation (Linux/Mac)
 │   └── generate-certs.ps1         ✅ Cert generation (Windows)
-├── k8s/
-│   └── deployment.yaml            ✅ Kubernetes config
 ├── Dockerfile                     ✅ Docker image
 ├── docker-compose.yml             ✅ Docker Compose
 ├── tsconfig.json                  ✅ TypeScript config
@@ -260,18 +258,6 @@ docker run -p 50051:50051 notification-service:1.0.0
 docker-compose up -d
 ```
 
-### Method 5: Kubernetes
-
-```bash
-# Apply deployment
-kubectl apply -f k8s/deployment.yaml
-
-# Check pods
-kubectl get pods -l app=notification-service
-
-# View logs
-kubectl logs -l app=notification-service -f
-```
 
 ## 🧪 Testing
 
@@ -488,7 +474,7 @@ export class UserService implements OnModuleInit {
 - 🔲 Structured logging (Winston, Pino)
 - 🔲 Metrics (Prometheus + Grafana)
 - 🔲 Distributed tracing (OpenTelemetry, Jaeger)
-- 🔲 Health checks (Kubernetes liveness/readiness)
+- 🔲 Health checks endpoints
 
 ### Testing
 - ✅ Test client
@@ -499,10 +485,8 @@ export class UserService implements OnModuleInit {
 ### Deployment
 - ✅ Dockerfile
 - ✅ Docker Compose
-- ✅ Kubernetes manifests
 - ✅ Environment configuration
 - 🔲 CI/CD pipeline (GitHub Actions, GitLab CI)
-- 🔲 Helm charts (for k8s)
 
 ## 📚 Shared Proto Contract
 
