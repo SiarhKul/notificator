@@ -1,0 +1,39 @@
+import { Controller, UseInterceptors, UseFilters } from '@nestjs/common';
+import { GrpcMethod } from '@nestjs/microservices';
+import { NotificationService } from '../services/notification.service';
+import { GrpcAuthInterceptor } from '../interceptors/auth.interceptor';
+import { GrpcExceptionFilter } from '../filters/grpc-exception.filter';
+import {
+  SendNotificationDto,
+  SendNotificationResponseDto,
+} from '../dto/notification.dto';
+
+@Controller()
+@UseInterceptors(GrpcAuthInterceptor)
+@UseFilters(GrpcExceptionFilter)
+export class NotificationController {
+  constructor(private readonly notificationService: NotificationService) {}
+
+  @GrpcMethod('NotificationService', 'SendNotification')
+  async sendNotification(
+    data: SendNotificationDto,
+  ): Promise<SendNotificationResponseDto> {
+    return this.notificationService.sendNotification(data);
+  }
+
+  @GrpcMethod('NotificationService', 'SendBatchNotifications')
+  async sendBatchNotifications(data: any): Promise<any> {
+    return this.notificationService.sendBatchNotifications(data);
+  }
+
+  @GrpcMethod('NotificationService', 'GetNotificationStatus')
+  async getNotificationStatus(data: any): Promise<any> {
+    return this.notificationService.getNotificationStatus(data);
+  }
+
+  @GrpcMethod('NotificationService', 'HealthCheck')
+  async healthCheck(data: any): Promise<any> {
+    return this.notificationService.healthCheck(data);
+  }
+}
+
