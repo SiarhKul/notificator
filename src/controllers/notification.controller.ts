@@ -21,11 +21,6 @@ export class NotificationController {
     return this.notificationService.sendNotification(data);
   }
 
-  @GrpcMethod('NotificationService', 'SendBatchNotifications')
-  async sendBatchNotifications(data: any): Promise<any> {
-    return this.notificationService.sendBatchNotifications(data);
-  }
-
   @GrpcMethod('NotificationService', 'GetNotificationStatus')
   async getNotificationStatus(data: any): Promise<any> {
     return this.notificationService.getNotificationStatus(data);

@@ -8,7 +8,6 @@ import {
 
 @Injectable()
 export class NotificationService {
-  // In-memory storage for demo (replace with database in production)
   private notifications = new Map<string, any>();
 
   async sendNotification(
@@ -17,16 +16,8 @@ export class NotificationService {
     const notificationId = uuidv4();
     const timestamp = Date.now();
 
-    console.log(`[Notification] ${new Date()} Processing notification:`, {
-      id: notificationId,
-      event_id: request.event_id,
-      user_id: request.user_id,
-      type: request.type,
-      template_id: request.template_id,
-    });
 
     try {
-      // Simulate notification processing
       await this.processNotification(request);
 
       const notification = {
@@ -58,36 +49,6 @@ export class NotificationService {
         timestamp,
       };
     }
-  }
-
-  async sendBatchNotifications(
-    request: any,
-  ): Promise<any> {
-    console.log(`[Notification] Processing batch: ${request.batch_id}`);
-
-    const results = [];
-    let successCount = 0;
-    let failedCount = 0;
-
-    for (const notification of request.notifications) {
-      const result = await this.sendNotification(notification);
-      results.push(result);
-
-      if (result.success) {
-        successCount++;
-      } else {
-        failedCount++;
-      }
-    }
-
-    return {
-      success: true,
-      batch_id: request.batch_id,
-      total_count: request.notifications.length,
-      success_count: successCount,
-      failed_count: failedCount,
-      results,
-    };
   }
 
   async getNotificationStatus(request: any): Promise<any> {
@@ -125,7 +86,6 @@ export class NotificationService {
   }
 
   private async processNotification(request: SendNotificationDto): Promise<void> {
-    // Simulate async processing with timeout
     await new Promise((resolve) =>
       setTimeout(resolve, Math.random() * 100),
     );
@@ -135,8 +95,8 @@ export class NotificationService {
     // - SMS: Send via Twilio, AWS SNS, etc.
     // - Push: Send via FCM, APNs, etc.
     // - Webhook: Send HTTP request
-
-    console.log(`[Notification] Sent ${request.type} to user ${request.user_id}`);
+    console.log('-----------',request)
+    console.log(`11111[Notification] Sent ${request.type} to user ${request.user_id}`);
   }
 }
 

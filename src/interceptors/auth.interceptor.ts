@@ -24,7 +24,7 @@ export class GrpcAuthInterceptor implements NestInterceptor {
       console.warn('Missing request ID');
     }
 
-    console.log(`[gRPC Request] Service: ${serviceId}, RequestId: ${requestId}`);
+    console.log(`[Interceptor] [gRPC Request] Service: ${serviceId}, RequestId: ${requestId}`);
 
     return next.handle();
   }

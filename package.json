@@ -7,6 +7,7 @@
     "start": "node dist/main.js",
     "start:dev": "ts-node src/main.ts",
     "start:watch": "nodemon --watch src --exec ts-node src/main.ts",
+    "kill-port": "powershell -ExecutionPolicy Bypass -File ./scripts/kill-port.ps1 -Port 50051",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
