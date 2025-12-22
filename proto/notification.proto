@@ -2,18 +2,9 @@ syntax = "proto3";
 
 package notification;
 
-// Notification Service Definition
 service NotificationService {
-  // Send single notification
   rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
-
-  // Send batch notifications
-  rpc SendBatchNotifications(SendBatchNotificationsRequest) returns (SendBatchNotificationsResponse);
-
-  // Get notification status
   rpc GetNotificationStatus(GetNotificationStatusRequest) returns (GetNotificationStatusResponse);
-
-  // Health check
   rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
 }
 
@@ -59,22 +50,6 @@ message SendNotificationResponse {
   string message = 3;
   NotificationStatus status = 4;
   int64 timestamp = 5;
-}
-
-// Batch notifications
-message SendBatchNotificationsRequest {
-  string batch_id = 1;
-  repeated SendNotificationRequest notifications = 2;
-  map<string, string> metadata = 3;
-}
-
-message SendBatchNotificationsResponse {
-  bool success = 1;
-  string batch_id = 2;
-  int32 total_count = 3;
-  int32 success_count = 4;
-  int32 failed_count = 5;
-  repeated SendNotificationResponse results = 6;
 }
 
 // Get notification status
