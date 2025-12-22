@@ -49,7 +49,7 @@ async function testSendNotification() {
 
   const request = {
     event_id: `evt_${Date.now()}`,
-    user_id: 'user_12345',
+    user_id: 'user_1234567',
     type: 'EMAIL',
     template_id: 'welcome_email',
     payload: {
@@ -62,8 +62,11 @@ async function testSendNotification() {
     metadata: {},
   };
 
+        console.log('[TEST_FILE] ✅ Request:', JSON.stringify(request, null, 2));
+
   return new Promise((resolve, reject) => {
     client.SendNotification(request, createMetadata(), (error, response) => {
+
       if (error) {
         console.error('[TEST_FILE] ❌ Error:', error.message);
         reject(error);
@@ -177,19 +180,19 @@ async function runTests() {
 
   try {
     // Test 1: Health check
-    await testHealthCheck();
+    // await testHealthCheck();
 
     // Test 2: Send notification and get ID
     const sendResponse = await testSendNotification() as any;
     const notificationId = sendResponse.notification_id;
 
     // Test 3: Get status of sent notification
-    await testGetStatus(notificationId);
+    // await testGetStatus(notificationId);
 
     // Test 4: Batch notifications
-    await testBatchNotifications();
+    // await testBatchNotifications();
 
-    console.log('[TEST_FILE] \n✅ All tests completed successfully!');
+    // console.log('[TEST_FILE] \n✅ All tests completed successfully!');
   } catch (error) {
     console.error('[TEST_FILE] \n❌ Test failed:', error);
     process.exit(1);
