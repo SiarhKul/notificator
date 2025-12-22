@@ -17,7 +17,7 @@ export class NotificationService {
     const notificationId = uuidv4();
     const timestamp = Date.now();
 
-    console.log(`[Notification] Processing notification:`, {
+    console.log(`[Notification] ${new Date()} Processing notification:`, {
       id: notificationId,
       event_id: request.event_id,
       user_id: request.user_id,

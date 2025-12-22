@@ -4,7 +4,7 @@ import { status } from '@grpc/grpc-js';
 
 @Catch()
 export class GrpcExceptionFilter implements RpcExceptionFilter {
-  catch(exception: any, host: ArgumentsHost): Observable<any> {
+  catch(exception: any): Observable<any> {
     const error = {
       code: this.getGrpcStatusCode(exception),
       message: exception.message || 'Internal server error',
@@ -29,7 +29,6 @@ export class GrpcExceptionFilter implements RpcExceptionFilter {
       return exception.code;
     }
 
-    // Map HTTP status to gRPC status
     const statusCode = exception.status || exception.statusCode;
     switch (statusCode) {
       case 400:

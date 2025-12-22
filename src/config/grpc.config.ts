@@ -1,8 +1,9 @@
 import { Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import * as fs from 'fs';
-import { credentials, ServerCredentials } from '@grpc/grpc-js';
+import {  ServerCredentials } from '@grpc/grpc-js';
 
+console.log('dirname:', __dirname);
 export interface GrpcConfig {
   transport: Transport.GRPC;
   options: {
@@ -41,7 +42,6 @@ export function getGrpcConfig(): GrpcConfig {
     },
   };
 
-  // Configure mTLS if enabled
   if (useTls) {
     try {
       const serverCert = fs.readFileSync(

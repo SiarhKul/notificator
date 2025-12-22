@@ -8,9 +8,9 @@ import {
   SendNotificationResponseDto,
 } from '../dto/notification.dto';
 
-@Controller()
-@UseInterceptors(GrpcAuthInterceptor)
 @UseFilters(GrpcExceptionFilter)
+@UseInterceptors(GrpcAuthInterceptor)
+@Controller()
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 

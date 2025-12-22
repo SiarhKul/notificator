@@ -5,6 +5,7 @@ var microservices_1 = require("@nestjs/microservices");
 var path_1 = require("path");
 var fs = require("fs");
 var grpc_js_1 = require("@grpc/grpc-js");
+console.log('dirname:', __dirname);
 function getGrpcConfig() {
     var host = process.env.GRPC_HOST || '0.0.0.0';
     var port = process.env.GRPC_PORT || '50051';
@@ -17,8 +18,8 @@ function getGrpcConfig() {
             protoPath: (0, path_1.join)(__dirname, '../../proto/notification.proto'),
             loader: {
                 keepCase: true,
-                longs: String,
-                enums: String,
+                longs: 'String',
+                enums: 'String',
                 defaults: true,
                 oneofs: true,
             },
