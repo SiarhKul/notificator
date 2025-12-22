@@ -17,12 +17,11 @@ const packageDefinition = loadSync(PROTO_PATH, {
 const protoDescriptor = loadPackageDefinition(packageDefinition) as any;
 const notificationProto = protoDescriptor.notification;
 
-// Client configuration
 const GRPC_URL = process.env.GRPC_URL || 'localhost:50051';
 const USE_TLS = process.env.GRPC_USE_TLS === 'true';
 
-// Create credentials
 let creds;
+
 if (USE_TLS) {
   const ca = fs.readFileSync('./certs/ca-cert.pem');
   const key = fs.readFileSync('./certs/client-key.pem');
@@ -35,21 +34,17 @@ if (USE_TLS) {
   console.log('⚠️  Using insecure connection');
 }
 
-// Create client
 const client = new notificationProto.NotificationService(GRPC_URL, creds);
 
-// Helper to create metadata with auth
 function createMetadata(): Metadata {
   const metadata = new Metadata();
-  metadata.add('authorization', 'Bearer test-token-123');
   metadata.add('x-service-id', 'test-client');
   metadata.add('x-request-id', `req_${Date.now()}`);
   return metadata;
 }
 
-// Example 1: Send single notification
 async function testSendNotification() {
-  console.log('\n📧 Test 1: Send Notification');
+  console.log('[TEST_FILE]\n📧 Test 1: Send Notification');
   console.log('─'.repeat(50));
 
   const request = {
@@ -70,10 +65,10 @@ async function testSendNotification() {
   return new Promise((resolve, reject) => {
     client.SendNotification(request, createMetadata(), (error, response) => {
       if (error) {
-        console.error('❌ Error:', error.message);
+        console.error('[TEST_FILE] ❌ Error:', error.message);
         reject(error);
       } else {
-        console.log('✅ Response:', JSON.stringify(response, null, 2));
+        console.log('[TEST_FILE] ✅ Response:', JSON.stringify(response, null, 2));
         resolve(response);
       }
     });
@@ -82,7 +77,7 @@ async function testSendNotification() {
 
 // Example 2: Send batch notifications
 async function testBatchNotifications() {
-  console.log('\n📨 Test 2: Batch Notifications');
+  console.log('[TEST_FILE] \n📨 Test 2: Batch Notifications');
   console.log('─'.repeat(50));
 
   const request = {
@@ -119,10 +114,10 @@ async function testBatchNotifications() {
   return new Promise((resolve, reject) => {
     client.SendBatchNotifications(request, createMetadata(), (error, response) => {
       if (error) {
-        console.error('❌ Error:', error.message);
+        console.error('[TEST_FILE] ❌ Error:', error.message);
         reject(error);
       } else {
-        console.log('✅ Response:', JSON.stringify(response, null, 2));
+        console.log('[TEST_FILE] ✅ Response:', JSON.stringify(response, null, 2));
         resolve(response);
       }
     });
@@ -131,7 +126,7 @@ async function testBatchNotifications() {
 
 // Example 3: Get notification status
 async function testGetStatus(notificationId: string) {
-  console.log('\n🔍 Test 3: Get Notification Status');
+  console.log('[TEST_FILE] \n🔍 Test 3: Get Notification Status');
   console.log('─'.repeat(50));
 
   const request = {
@@ -142,10 +137,10 @@ async function testGetStatus(notificationId: string) {
   return new Promise((resolve, reject) => {
     client.GetNotificationStatus(request, createMetadata(), (error, response) => {
       if (error) {
-        console.error('❌ Error:', error.message);
+        console.error('[TEST_FILE] ❌ Error:', error.message);
         reject(error);
       } else {
-        console.log('✅ Response:', JSON.stringify(response, null, 2));
+        console.log('[TEST_FILE] ✅ Response:', JSON.stringify(response, null, 2));
         resolve(response);
       }
     });
@@ -154,7 +149,7 @@ async function testGetStatus(notificationId: string) {
 
 // Example 4: Health check
 async function testHealthCheck() {
-  console.log('\n❤️  Test 4: Health Check');
+  console.log('[TEST_FILE] \n❤️  Test 4: Health Check');
   console.log('─'.repeat(50));
 
   const request = {
@@ -164,10 +159,10 @@ async function testHealthCheck() {
   return new Promise((resolve, reject) => {
     client.HealthCheck(request, createMetadata(), (error, response) => {
       if (error) {
-        console.error('❌ Error:', error.message);
+        console.error('[TEST_FILE] ❌ Error:', error.message);
         reject(error);
       } else {
-        console.log('✅ Response:', JSON.stringify(response, null, 2));
+        console.log('[TEST_FILE] ✅ Response:', JSON.stringify(response, null, 2));
         resolve(response);
       }
     });
@@ -176,8 +171,8 @@ async function testHealthCheck() {
 
 // Run all tests
 async function runTests() {
-  console.log('🚀 Starting gRPC Client Tests');
-  console.log('📡 Server URL:', GRPC_URL);
+  console.log('[TEST_FILE] 🚀 Starting gRPC Client Tests');
+  console.log('[TEST_FILE]📡 Server URL:', GRPC_URL);
   console.log('═'.repeat(50));
 
   try {
@@ -194,9 +189,9 @@ async function runTests() {
     // Test 4: Batch notifications
     await testBatchNotifications();
 
-    console.log('\n✅ All tests completed successfully!');
+    console.log('[TEST_FILE] \n✅ All tests completed successfully!');
   } catch (error) {
-    console.error('\n❌ Test failed:', error);
+    console.error('[TEST_FILE] \n❌ Test failed:', error);
     process.exit(1);
   }
 }

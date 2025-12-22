@@ -52,10 +52,8 @@ var packageDefinition = (0, proto_loader_1.loadSync)(PROTO_PATH, {
 });
 var protoDescriptor = (0, grpc_js_2.loadPackageDefinition)(packageDefinition);
 var notificationProto = protoDescriptor.notification;
-// Client configuration
 var GRPC_URL = process.env.GRPC_URL || 'localhost:50051';
 var USE_TLS = process.env.GRPC_USE_TLS === 'true';
-// Create credentials
 var creds;
 if (USE_TLS) {
     var ca = fs.readFileSync('./certs/ca-cert.pem');
@@ -68,17 +66,13 @@ else {
     creds = grpc_js_1.credentials.createInsecure();
     console.log('⚠️  Using insecure connection');
 }
-// Create client
 var client = new notificationProto.NotificationService(GRPC_URL, creds);
-// Helper to create metadata with auth
 function createMetadata() {
     var metadata = new grpc_js_1.Metadata();
-    metadata.add('authorization', 'Bearer test-token-123');
     metadata.add('x-service-id', 'test-client');
     metadata.add('x-request-id', "req_".concat(Date.now()));
     return metadata;
 }
-// Example 1: Send single notification
 function testSendNotification() {
     return __awaiter(this, void 0, void 0, function () {
         var request;
