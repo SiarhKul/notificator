@@ -38,7 +38,7 @@ const client = new notificationProto.NotificationService(GRPC_URL, creds);
 
 function createMetadata(): Metadata {
   const metadata = new Metadata();
-  metadata.add('x-service-id', 'test-client');
+  metadata.add('x-service-id', 'test-client')
   metadata.add('x-request-id', `req_${Date.now()}`);
   return metadata;
 }
@@ -62,7 +62,7 @@ async function testSendNotification() {
     metadata: {},
   };
 
-        console.log('[TEST_FILE] ✅ Request:', JSON.stringify(request, null, 2));
+  console.log('[TEST_FILE] ✅ Request:', JSON.stringify(request, null, 2));
 
   return new Promise((resolve, reject) => {
     client.SendNotification(request, createMetadata(), (error, response) => {
@@ -111,7 +111,6 @@ async function testBatchNotifications() {
         priority: 'HIGH',
       },
     ],
-    metadata: {},
   };
 
   return new Promise((resolve, reject) => {
